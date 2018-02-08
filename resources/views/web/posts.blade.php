@@ -5,6 +5,7 @@
 <div class="container">
 	<div class="col-md-8 col-md-offset-2">
 		<h1>Lista de Articulos</h1>
+
 		@foreach ($posts as $post)
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -15,7 +16,7 @@
 					<img src="{{ $post->file }}" class="img-responsive">
 					@endif
 					{{ $post->excerpt }}
-					<a href="#" class="pull-right">Leer más</a>
+					<a href="{{ route('post', $post->slug) }}" class="pull-right">Leer más</a>
 				</div>
 
 			</div>
