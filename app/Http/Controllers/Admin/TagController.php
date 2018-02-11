@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\TagStoreRequest;
+use App\Http\Requests\TagUpdateRequest;
 use App\Http\Controllers\Controller;
 
 use App\Tag;
@@ -22,7 +24,7 @@ class TagController extends Controller
     {
         $tags = Tag::orderBy('id', 'DESC')->paginate();
 
-        dd($tags);
+       
         return view('admin.tags.index', compact('tags'));
     }
 
@@ -33,7 +35,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('admin.tags.index');
+        return view('admin.tags.create');
     }
 
     /**
@@ -42,7 +44,7 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagStoreRequest $request)
     {
         $tag = Tag::create($request->all());
 
@@ -84,7 +86,7 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TagUpdateRequest $request, $id)
     {
         $tag = Tag::find($id);
 
@@ -105,6 +107,6 @@ class TagController extends Controller
         $tag = Tag::find($id)->delete();
 
 
-       return back()->with('info', 'Etiqueta eliminado la etiqueta '+$tag' con éxito');
+       return back()->with('info', 'Etiqueta eliminado la etiqueta '.+$tag .' con éxito');
     }
 }
